@@ -2,11 +2,12 @@
 const nextConfig = {
   images: {
     domains: [
-      "res.cloudinary.com",
-      "avatars.githubusercontent.com",
-      "lh3.googleusercontent.com",
+      'res.cloudinary.com',
+      'avatars.githubusercontent.com',
+      'lh3.googleusercontent.com',
     ],
   },
-};
+  allowExtensions: ['.ts', '.tsx'],
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
