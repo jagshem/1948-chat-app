@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { User } from "@prisma/client";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import Modal from "@/app/components/Modal";
-import Input from "@/app/components/inputs/Input";
-import Select from "@/app/components/inputs/Select";
-import Button from "@/app/components/Button";
+import { User } from '@prisma/client'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+import Modal from '@/app/components/Modal'
+import Input from '@/app/components/inputs/Input'
+import Select from '@/app/components/inputs/Select'
+import Button from '@/app/components/Button'
 
 interface GroupChatModalProps {
-  isOpen?: boolean;
-  onClose: () => void;
-  users: User[];
+  isOpen: boolean
+  onClose: () => void
+  users: User[]
 }
 
 const GroupChatModal: React.FC<GroupChatModalProps> = ({
@@ -22,8 +22,8 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
   onClose,
   users,
 }) => {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     register,
@@ -33,27 +33,27 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: "",
+      name: '',
       members: [],
     },
-  });
+  })
 
-  const members = watch("members");
+  const members = watch('members')
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
+    setIsLoading(true)
     axios
-      .post("/api/conversations", {
+      .post('/api/conversations', {
         ...data,
         isGroup: true,
       })
       .then(() => {
-        router.refresh();
-        onClose();
+        router.refresh()
+        onClose()
       })
-      .catch(() => toast.error("Something went wrong!"))
-      .finally(() => setIsLoading(false));
-  };
+      .catch(() => toast.error('Something went wrong!'))
+      .finally(() => setIsLoading(false))
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -97,7 +97,7 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
                   label: `${user.name} (${user.username})`,
                 }))}
                 onChange={(value) =>
-                  setValue("members", value, {
+                  setValue('members', value, {
                     shouldValidate: true,
                   })
                 }
@@ -124,7 +124,7 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
         </div>
       </form>
     </Modal>
-  );
-};
+  )
+}
 
-export default GroupChatModal;
+export default GroupChatModal
