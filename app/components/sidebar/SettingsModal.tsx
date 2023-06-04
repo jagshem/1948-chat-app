@@ -14,7 +14,7 @@ import Image from 'next/image'
 import { toast } from 'react-hot-toast'
 
 interface SettingsModalProps {
-  isOpen?: boolean
+  isOpen: boolean
   onClose: () => void
   currentUser: User
 }
