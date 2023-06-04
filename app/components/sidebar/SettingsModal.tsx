@@ -16,7 +16,7 @@ import { toast } from 'react-hot-toast'
 interface SettingsModalProps {
   isOpen?: boolean
   onClose: () => void
-  currentUser: User[];
+  currentUser: User
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({
