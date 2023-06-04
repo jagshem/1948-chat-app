@@ -16,7 +16,7 @@ import { toast } from 'react-hot-toast'
 interface SettingsModalProps {
   isOpen?: boolean
   onClose: () => void
-  currentUser: User
+  currentUser: User[];
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -39,6 +39,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
     defaultValues: {
       name: currentUser?.name,
       image: currentUser?.image,
+      username: currentUser?.username,
     },
   })
 
@@ -69,6 +70,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2
+              className="text-base 
+                font-semibold 
+                leading-7 
+                text-gray-900 text-center mb-2"
+            >
+              1948 Profile Settings
+            </h2>
+            <h2
               className="
                 text-base 
                 font-semibold 
@@ -87,6 +96,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                 disabled={isLoading}
                 label="Name"
                 id="name"
+                errors={errors}
+                required
+                register={register}
+              />
+              <Input
+                disabled={isLoading}
+                label="Username"
+                id="username"
                 errors={errors}
                 required
                 register={register}
@@ -110,7 +127,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                     height="48"
                     className="rounded-full"
                     src={
-                      image || currentUser?.image || '/images/placeholder.jpg'
+                      image || currentUser?.image || '/images/placeholder.png'
                     }
                     alt="Avatar"
                   />
