@@ -1,37 +1,37 @@
-"use client";
+'use client'
 
-import { HiChevronLeft } from "react-icons/hi";
-import { HiEllipsisHorizontal } from "react-icons/hi2";
-import { useMemo, useState } from "react";
-import Link from "next/link";
-import { Conversation, User } from "@prisma/client";
+import { HiChevronLeft } from 'react-icons/hi'
+import { HiEllipsisHorizontal } from 'react-icons/hi2'
+import { useMemo, useState } from 'react'
+import Link from 'next/link'
+import { Conversation, User } from '@prisma/client'
 
-import useOtherUser from "@/app/hooks/useOtherUser";
-import useActiveList from "@/app/hooks/useActiveList";
+import useOtherUser from '@/app/hooks/useOtherUser'
+import useActiveList from '@/app/hooks/useActiveList'
 
-import Avatar from "@/app/components/Avatar";
-import AvatarGroup from "@/app/components/AvatarGroup";
-import ProfileDrawer from "./ProfileDrawer";
+import Avatar from '@/app/components/Avatar'
+import AvatarGroup from '@/app/components/AvatarGroup'
+import ProfileDrawer from './ProfileDrawer'
 
 interface HeaderProps {
   conversation: Conversation & {
-    users: User[];
-  };
+    users: User[]
+  }
 }
 
 const Header: React.FC<HeaderProps> = ({ conversation }) => {
-  const otherUser = useOtherUser(conversation);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const otherUser = useOtherUser(conversation)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
-  const { members } = useActiveList();
-  const isActive = members.indexOf(otherUser?.email!) !== -1;
+  const { members } = useActiveList()
+  const isActive = members.indexOf(otherUser?.email!) !== -1
   const statusText = useMemo(() => {
     if (conversation.isGroup) {
-      return `${conversation.users.length} members`;
+      return `${conversation.users.length} members`
     }
 
-    return isActive ? "Active" : "Offline";
-  }, [conversation, isActive]);
+    return isActive ? 'Active' : 'Offline'
+  }, [conversation, isActive])
 
   return (
     <>
@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
             <Avatar user={otherUser} />
           )}
           <div className="flex flex-col">
-            <div>{conversation.name || otherUser.name}</div>
+            <div>{conversation.name || otherUser.name || 'Unknown'}</div>
             <div className="text-sm font-light text-neutral-500">
               {statusText}
             </div>
@@ -93,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
         />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
