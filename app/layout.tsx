@@ -3,7 +3,7 @@ import AuthContext from './context/AuthContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
-import ActiveStatus from './components/ActiveStatus.tsx'
+import ActiveStatus from './components/ActiveStatus'
 
 const inter = Inter({ subsets: ['latin'] })
 
